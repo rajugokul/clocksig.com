@@ -1,6 +1,0 @@
-<html>
-<title>hello</title>
-<h1>
-<body>new_website</body>
-</h1>
-</html>
