@@ -57,6 +57,18 @@
 		box-sizing: border-box;
 	}
 
+
+
+.city {
+ width: auto;
+  height: auto;
+  background-repeat: no-repeat;
+  background-size: contain;
+
+}
+
+
+
 /* Containers */
 
 	.container {
@@ -3996,6 +4008,7 @@
 		}
 
 /* Banner */
+
 
 	.banner {
 		background-color: #8a4680;
