@@ -60,10 +60,9 @@
 
 
 .city {
- width: auto;
-  height: auto;
-  background-repeat: no-repeat;
-  background-size: contain;
+  width: auto ;
+  max-width: 100% ;
+  height: auto ;
 
 }
 
