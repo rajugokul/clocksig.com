@@ -1,315 +1,304 @@
-/*
-	Hielo by TEMPLATED
-	templated.co @templatedco
-	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
-*/
+(function ($)
+  { "use strict"
+  
+/* 1. Proloder */
+    $(window).on('load', function () {
+      $('#preloader-active').delay(450).fadeOut('slow');
+      $('body').delay(450).css({
+        'overflow': 'visible'
+      });
+    });
+
+
+/* 2. slick Nav */
+// mobile_menu
+    var menu = $('ul#navigation');
+    if(menu.length){
+      menu.slicknav({
+        prependTo: ".mobile_menu",
+        closedSymbol: '+',
+        openedSymbol:'-'
+      });
+    };
+
+
+/* 3. MainSlider-1 */
+    function mainSlider() {
+      var BasicSlider = $('.slider-active');
+      BasicSlider.on('init', function (e, slick) {
+        var $firstAnimatingElements = $('.single-slider:first-child').find('[data-animation]');
+        doAnimations($firstAnimatingElements);
+      });
+      BasicSlider.on('beforeChange', function (e, slick, currentSlide, nextSlide) {
+        var $animatingElements = $('.single-slider[data-slick-index="' + nextSlide + '"]').find('[data-animation]');
+        doAnimations($animatingElements);
+      });
+      BasicSlider.slick({
+        autoplay: false,
+        autoplaySpeed: 10000,
+        dots: false,
+        fade: true,
+        arrows: false,
+        prevArrow: '<button type="button" class="slick-prev"><i class="ti-shift-left"></i></button>',
+        nextArrow: '<button type="button" class="slick-next"><i class="ti-shift-right"></i></button>',
+        responsive: [{
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              infinite: true,
+            }
+          },
+          {
+            breakpoint: 991,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              arrows: false
+            }
+          },
+          {
+            breakpoint: 767,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              arrows: false
+            }
+          }
+        ]
+      });
+
+      function doAnimations(elements) {
+        var animationEndEvents = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+        elements.each(function () {
+          var $this = $(this);
+          var $animationDelay = $this.data('delay');
+          var $animationType = 'animated ' + $this.data('animation');
+          $this.css({
+            'animation-delay': $animationDelay,
+            '-webkit-animation-delay': $animationDelay
+          });
+          $this.addClass($animationType).one(animationEndEvents, function () {
+            $this.removeClass($animationType);
+          });
+        });
+      }
+    }
+    mainSlider();
+
+
+ // recent-active
+  $('.customar-active').slick({
+    dots: true,
+    infinite: true,
+    speed: 600,
+    arrows: false,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    prevArrow: '<button type="button" class="slick-prev"> <span class="flaticon-arrow"></span></button>',
+    nextArrow: '<button type="button" class="slick-next"> <span class="flaticon-arrow"><span></button>',
+    autoplay:false,
+    initialSlide: 3,
+    centerMode: true,
+    loop:true,
+    responsive: [
+      {
+        breakpoint: 1300,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: false,
+        }
+      }, 
+           {
+        breakpoint: 1050,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: false,
+        }
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: false,
+        }
+      },
+      {
+        breakpoint: 991,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          centerMode: false
+        }
+      }
+      // You can unslick at a given breakpoint now by adding:
+      // settings: "unslick"
+      // instead of a settings object
+    ]
+  });
+
+/* 4. Testimonial Active*/
+  var testimonial = $('.h1-testimonial-active');
+    if(testimonial.length){
+    testimonial.slick({
+        dots: false,
+        infinite: true,
+        speed: 1000,
+        autoplay:true,
+        loop:true,
+        arrows: false,
+        prevArrow: '<button type="button" class="slick-prev"><i class="ti-angle-left"></i></button>',
+        nextArrow: '<button type="button" class="slick-next"><i class="ti-angle-right"></i></button>',
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        responsive: [
+          {
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              infinite: true,
+              dots: false,
+              arrow:false
+            }
+          },
+          {
+            breakpoint: 600,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              arrows:false
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              arrows:false,
+            }
+          }
+        ]
+      });
+    }
+
+
+/* 5.  Applic App */
+    var client_list = $('.app-active');
+    if(client_list.length){
+      client_list.owlCarousel({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        loop: true,
+        autoplay:true,
+        speed: 3000,
+        smartSpeed:2000,
+        dots: false,
+        margin: 15,
+        nav  : false,
+        navText : ["<i class='fas fa-arrow-left'></i>","<i class='fas fa-arrow-right'></i>"],
+        autoplayHoverPause: true,
+        responsive : {
+          0 : {
+            items: 1
+          },
+          768 : {
+            items: 2
+          },
+          992 : {
+            items: 2
+          },
+          1200:{
+            items: 4
+          }
+        }
+      });
+    }
+
+
+/* 6. Nice Selectorp  */
+  var nice_Select = $('select');
+    if(nice_Select.length){
+      nice_Select.niceSelect();
+    }
+
+/* 7.  Custom Sticky Menu  */
+    $(window).on('scroll', function () {
+      var scroll = $(window).scrollTop();
+      if (scroll < 245) {
+        $(".header-sticky").removeClass("sticky-bar");
+      } else {
+        $(".header-sticky").addClass("sticky-bar");
+      }
+    });
+
+    $(window).on('scroll', function () {
+      var scroll = $(window).scrollTop();
+      if (scroll < 245) {
+          $(".header-sticky").removeClass("sticky");
+      } else {
+          $(".header-sticky").addClass("sticky");
+      }
+    });
+
+
+
+/* 8. sildeBar scroll */
+    $.scrollUp({
+      scrollName: 'scrollUp', // Element ID
+      topDistance: '300', // Distance from top before showing element (px)
+      topSpeed: 300, // Speed back to top (ms)
+      animation: 'fade', // Fade, slide, none
+      animationInSpeed: 200, // Animation in speed (ms)
+      animationOutSpeed: 200, // Animation out speed (ms)
+      scrollText: '<i class="ti-arrow-up"></i>', // Text for element
+      activeOverlay: false, // Set CSS color to display scrollUp active point, e.g '#00FFFF'
+    });
+
+
+/* 9. data-background */
+    $("[data-background]").each(function () {
+      $(this).css("background-image", "url(" + $(this).attr("data-background") + ")")
+      });
+
+
+/* 10. WOW active */
+    new WOW().init();
+
+/* 11. Datepicker */
+    
+// 11. ---- Mailchimp js --------//  
+    function mailChimp() {
+      $('#mc_embed_signup').find('form').ajaxChimp();
+    }
+    mailChimp();
+
+
+// 12 Pop Up Img
+    var popUp = $('.single_gallery_part, .img-pop-up');
+      if(popUp.length){
+        popUp.magnificPopup({
+          type: 'image',
+          gallery:{
+            enabled:true
+          }
+        });
+      }
 
-var settings = {
 
-	banner: {
 
-		// Indicators (= the clickable dots at the bottom).
-			indicators: true,
-
-		// Transition speed (in ms)
-		// For timing purposes only. It *must* match the transition speed of "#banner > article".
-			speed: 1500,
-
-		// Transition delay (in ms)
-			delay: 5000,
-
-		// Parallax intensity (between 0 and 1; higher = more intense, lower = less intense; 0 = off)
-			parallax: 0.25
-
-	}
-
-};
-
-(function($) {
-
-	skel.breakpoints({
-		xlarge:	'(max-width: 1680px)',
-		large:	'(max-width: 1280px)',
-		medium:	'(max-width: 980px)',
-		small:	'(max-width: 736px)',
-		xsmall:	'(max-width: 480px)'
-	});
-
-	/**
-	 * Applies parallax scrolling to an element's background image.
-	 * @return {jQuery} jQuery object.
-	 */
-	$.fn._parallax = (skel.vars.browser == 'ie' || skel.vars.mobile) ? function() { return $(this) } : function(intensity) {
-
-		var	$window = $(window),
-			$this = $(this);
-
-		if (this.length == 0 || intensity === 0)
-			return $this;
-
-		if (this.length > 1) {
-
-			for (var i=0; i < this.length; i++)
-				$(this[i])._parallax(intensity);
-
-			return $this;
-
-		}
-
-		if (!intensity)
-			intensity = 0.25;
-
-		$this.each(function() {
-
-			var $t = $(this),
-				on, off;
-
-			on = function() {
-
-				$t.css('background-position', 'center 100%, center 100%, center 0px');
-
-				$window
-					.on('scroll._parallax', function() {
-
-						var pos = parseInt($window.scrollTop()) - parseInt($t.position().top);
-
-						$t.css('background-position', 'center ' + (pos * (-1 * intensity)) + 'px');
-
-					});
-
-			};
-
-			off = function() {
-
-				$t
-					.css('background-position', '');
-
-				$window
-					.off('scroll._parallax');
-
-			};
-
-			skel.on('change', function() {
-
-				if (skel.breakpoint('medium').active)
-					(off)();
-				else
-					(on)();
-
-			});
-
-		});
-
-		$window
-			.off('load._parallax resize._parallax')
-			.on('load._parallax resize._parallax', function() {
-				$window.trigger('scroll');
-			});
-
-		return $(this);
-
-	};
-
-	/**
-	 * Custom banner slider for Slate.
-	 * @return {jQuery} jQuery object.
-	 */
-	$.fn._slider = function(options) {
-
-		var	$window = $(window),
-			$this = $(this);
-
-		if (this.length == 0)
-			return $this;
-
-		if (this.length > 1) {
-
-			for (var i=0; i < this.length; i++)
-				$(this[i])._slider(options);
-
-			return $this;
-
-		}
-
-		// Vars.
-			var	current = 0, pos = 0, lastPos = 0,
-				slides = [], indicators = [],
-				$indicators,
-				$slides = $this.children('article'),
-				intervalId,
-				isLocked = false,
-				i = 0;
-
-		// Turn off indicators if we only have one slide.
-			if ($slides.length == 1)
-				options.indicators = false;
-
-		// Functions.
-			$this._switchTo = function(x, stop) {
-
-				if (isLocked || pos == x)
-					return;
-
-				isLocked = true;
-
-				if (stop)
-					window.clearInterval(intervalId);
-
-				// Update positions.
-					lastPos = pos;
-					pos = x;
-
-				// Hide last slide.
-					slides[lastPos].removeClass('top');
-
-					if (options.indicators)
-						indicators[lastPos].removeClass('visible');
-
-				// Show new slide.
-					slides[pos].addClass('visible').addClass('top');
-
-					if (options.indicators)
-						indicators[pos].addClass('visible');
-
-				// Finish hiding last slide after a short delay.
-					window.setTimeout(function() {
-
-						slides[lastPos].addClass('instant').removeClass('visible');
-
-						window.setTimeout(function() {
-
-							slides[lastPos].removeClass('instant');
-							isLocked = false;
-
-						}, 100);
-
-					}, options.speed);
-
-			};
-
-		// Indicators.
-			if (options.indicators)
-				$indicators = $('<ul class="indicators"></ul>').appendTo($this);
-
-		// Slides.
-			$slides
-				.each(function() {
-
-					var $slide = $(this),
-						$img = $slide.find('img');
-
-					// Slide.
-						$slide
-							.css('background-image', 'url("' + $img.attr('src') + '")')
-							.css('background-position', ($slide.data('position') ? $slide.data('position') : 'center'));
-
-					// Add to slides.
-						slides.push($slide);
-
-					// Indicators.
-						if (options.indicators) {
-
-							var $indicator_li = $('<li>' + i + '</li>').appendTo($indicators);
-
-							// Indicator.
-								$indicator_li
-									.data('index', i)
-									.on('click', function() {
-										$this._switchTo($(this).data('index'), true);
-									});
-
-							// Add to indicators.
-								indicators.push($indicator_li);
-
-						}
-
-					i++;
-
-				})
-				._parallax(options.parallax);
-
-		// Initial slide.
-			slides[pos].addClass('visible').addClass('top');
-
-			if (options.indicators)
-				indicators[pos].addClass('visible');
-
-		// Bail if we only have a single slide.
-			if (slides.length == 1)
-				return;
-
-		// Main loop.
-			intervalId = window.setInterval(function() {
-
-				current++;
-
-				if (current >= slides.length)
-					current = 0;
-
-				$this._switchTo(current);
-
-			}, options.delay);
-
-	};
-
-	$(function() {
-
-		var	$window 	= $(window),
-			$body 		= $('body'),
-			$header 	= $('#header'),
-			$banner 	= $('.banner');
-
-		// Disable animations/transitions until the page has loaded.
-			$body.addClass('is-loading');
-
-			$window.on('load', function() {
-				window.setTimeout(function() {
-					$body.removeClass('is-loading');
-				}, 100);
-			});
-
-		// Prioritize "important" elements on medium.
-			skel.on('+medium -medium', function() {
-				$.prioritize(
-					'.important\\28 medium\\29',
-					skel.breakpoint('medium').active
-				);
-			});
-
-		// Banner.
-			$banner._slider(settings.banner);
-
-		// Menu.
-			$('#menu')
-				.append('<a href="#menu" class="close"></a>')
-				.appendTo($body)
-				.panel({
-					delay: 500,
-					hideOnClick: true,
-					hideOnSwipe: true,
-					resetScroll: true,
-					resetForms: true,
-					side: 'right'
-				});
-
-		// Header.
-			if (skel.vars.IEVersion < 9)
-				$header.removeClass('alt');
-
-			if ($banner.length > 0
-			&&	$header.hasClass('alt')) {
-
-				$window.on('resize', function() { $window.trigger('scroll'); });
-
-				$banner.scrollex({
-					bottom:		$header.outerHeight(),
-					terminate:	function() { $header.removeClass('alt'); },
-					enter:		function() { $header.addClass('alt'); },
-					leave:		function() { $header.removeClass('alt'); $header.addClass('reveal'); }
-				});
-
-			}
-
-	});
 
 })(jQuery);
